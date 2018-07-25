@@ -1,0 +1,60 @@
+{
+    "name": "cottacush/cricket-reports",
+    "description": "Cricket Report Module",
+    "keywords": [
+      "yii2",
+      "framework",
+      "basic",
+      "report template",
+      "admin portal"
+    ],
+    "homepage": "https://github.com/cottacush/yii2-widgets",
+    "type": "library",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "require": {
+      "cottacush/yii2-widgets": "^1.0",
+      "hashids/hashids": "^3.0",
+      "yii2tech/csv-grid": "^1.0"
+    },
+    "authors": [
+      {
+        "name": "Cotta & Cush Developers",
+        "email": "developers@cottacush.com",
+        "homepage": "http://cottacush.com",
+        "role": "Developer"
+      },
+      {
+        "name": "Taiwo Ladipo",
+        "email": "taiwo.ladipo@cottacush.com",
+        "role": "Software Engineer"
+      },
+      {
+        "name": "Olawale Lawal",
+        "email": "wale@cottacush.com",
+        "role": "Software Engineer"
+      }
+    ],
+    "require-dev": {
+      "phpunit/phpunit": "~4.0||~5.0",
+      "scrutinizer/ocular": "~1.1",
+      "squizlabs/php_codesniffer": "~2.3"
+    },
+    "autoload": {
+      "psr-4": {
+        "CottaCush\\Cricket\\Report\\": "src"
+      }
+    },
+    "scripts": {
+      "test": "phpunit"
+    },
+    "extra": {
+      "branch-alias": {
+        "dev-master": "1.0-dev"
+      },
+      "asset-installer-paths": {
+        "npm-asset-library": "vendor/npm",
+        "bower-asset-library": "vendor/bower"
+      }
+    }
+}

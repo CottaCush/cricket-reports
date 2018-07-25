@@ -1,0 +1,25 @@
+{
+    "name": "cottacush/cricket-report",
+    "description": "Cricket Report Module",
+    "keywords": ["yii2", "framework", "basic", "report template", "admin portal"],
+    "type": "project",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "require": {
+        "cottacush/yii2-widgets": "^1.0",
+        "hashids/hashids": "^3.0",
+        "yii2tech/csv-grid": "^1.0"
+    },
+    "authors" : [
+        {
+            "name": "Taiwo Ladipo",
+            "email": "taiwo.ladipo@cottacush.com",
+            "role": "Software Engineer"
+        },
+        {
+            "name": "Olawale Lawal",
+            "email": "wale@cottacush.com",
+            "role": "Software Engineer"
+        }
+    ]
+}
