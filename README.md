@@ -1,4 +1,4 @@
-# yii2-widgets
+# Cricket Reports
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
@@ -7,7 +7,7 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-Useful Yii2 widgets created by the Cotta & Cush development team
+Reports module created by the Cotta & Cush development team
 
 ## Dependency
 
@@ -22,7 +22,7 @@ $ composer global require "fxp/composer-asset-plugin:~1.3"
 Via Composer
 
 ``` bash
-$ composer require cottacush/yii2-widgets
+$ composer require cottacush/cricket-reports
 ```
 
 ## Change log
@@ -45,7 +45,8 @@ If you discover any security related issues, please email <developers@cottacush.
 
 ## Credits
 
-- [Olajide Oye][link-author]
+- [Taiwo Ladipo][link-author]
+- [Olawale Lawal][link-author]
 - [All Contributors][link-contributors]
 
 ## License
