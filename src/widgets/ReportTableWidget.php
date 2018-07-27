@@ -2,9 +2,9 @@
 
 namespace CottaCush\Cricket\Report\Widgets;
 
-use app\widgets\EmptyStateWidget;
 use CottaCush\Cricket\Report\Interfaces\Queryable;
 use CottaCush\Yii2\Helpers\Html;
+use CottaCush\Yii2\Widgets\EmptyStateWidget;
 use yii\helpers\Url;
 
 /**
@@ -21,10 +21,11 @@ class ReportTableWidget extends BaseReportsWidget
     public $placeholderValues;
     public $tableClasses = 'table table-striped table-bordered';
 
-    private $columnHeaders;
     public $emptyResultMsg = 'The query returned an empty data set';
-    public $hasPlaceholders = false;
 
+    private $columnHeaders;
+
+    public $hasPlaceholders = false;
     private $hasResults;
     public $editFilterModalId = 'editFiltersModal';
 

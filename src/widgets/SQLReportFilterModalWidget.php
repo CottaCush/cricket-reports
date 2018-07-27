@@ -13,8 +13,6 @@ use CottaCush\Yii2\Widgets\BaseModalWidget;
 class SQLReportFilterModalWidget extends BaseModalWidget
 {
     public $title = 'Edit Filters';
-    public $modalCancelFooterClass = 'btn btn-default';
-    public $modalSubmitFooterClass = 'btn btn-md btn-primary';
     public $footerSubmit = 'Apply Filters';
     public $formMethod = 'post';
 
