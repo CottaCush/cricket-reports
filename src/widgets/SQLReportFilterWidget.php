@@ -2,7 +2,7 @@
 
 namespace CottaCush\Cricket\Report\Widgets;
 
-use CottaCush\Cricket\Report\Assets\SQLReportFilterFormReportsAsset;
+use CottaCush\Cricket\Report\Assets\SQLReportFilterFormAsset;
 use CottaCush\Cricket\Report\Generators\SQLReportFilterFactory;
 use CottaCush\Cricket\Report\Interfaces\Queryable;
 use CottaCush\Cricket\Report\Interfaces\Replaceable;
@@ -30,7 +30,7 @@ class SQLReportFilterWidget extends BaseReportsWidget
 
     public function run()
     {
-        SQLReportFilterFormReportsAsset::register($this->view);
+        SQLReportFilterFormAsset::register($this->view);
 
         $this->renderHeader();
         $this->renderPlaceholderFields();
