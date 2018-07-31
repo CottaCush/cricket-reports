@@ -59,12 +59,12 @@ class DefaultController extends BaseReportsController
         $hasPlaceholders = $report->getPlaceholders()->exists();
         $hasPlaceholdersReplaced = false;
         $data = [];
-        $values = $this->getRequest()->post();
+        $placeholderValues = $this->getRequest()->post();
         $query = $report->query;
 
         if ($this->isPost()) {
             try {
-                $queryBuilder = new SQLReportQueryBuilder($report, $values);
+                $queryBuilder = new SQLReportQueryBuilder($report, $placeholderValues);
                 $query = $queryBuilder->buildQuery();
 
                 $generator = new SQLReportGenerator($query);
@@ -95,7 +95,7 @@ class DefaultController extends BaseReportsController
 
         return $this->render('view', [
             'report' => $report, 'data' => $data, 'hasPlaceholders' => $hasPlaceholders,
-            'hasPlaceholdersReplaced' => $hasPlaceholdersReplaced, 'values' => $values
+            'hasPlaceholdersReplaced' => $hasPlaceholdersReplaced, 'values' => $placeholderValues
         ]);
     }
 

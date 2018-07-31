@@ -1,14 +1,14 @@
 <?php
 
 use CottaCush\Cricket\Report\Models\Report;
-use app\widgets\EmptyStateWidget;
 use CottaCush\Yii2\Widgets\ActionButtons;
+use CottaCush\Yii2\Widgets\EmptyStateWidget;
 use CottaCush\Yii2\Widgets\GridViewWidget;
 use yii\helpers\Url;
 
 $this->title = ' Reports';
 $this->params['breadcrumbs'] = [
-    ['label' => 'Reports', 'url' => '/reports/default'],
+    ['label' => 'Reports', 'url' => Url::toRoute('/reports/default/')],
     $this->title
 ];
 

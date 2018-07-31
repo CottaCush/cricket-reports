@@ -5,6 +5,7 @@ namespace CottaCush\Cricket\Report\Widgets;
 use CottaCush\Cricket\Report\Interfaces\Queryable;
 use CottaCush\Yii2\Helpers\Html;
 use CottaCush\Yii2\Widgets\EmptyStateWidget;
+use yii\helpers\BaseInflector;
 use yii\helpers\Url;
 
 /**
@@ -22,6 +23,7 @@ class ReportTableWidget extends BaseReportsWidget
     public $tableClasses = 'table table-striped table-bordered';
 
     public $emptyResultMsg = 'The query returned an empty data set';
+    private $noOfRecords;
 
     private $columnHeaders;
 
@@ -31,7 +33,9 @@ class ReportTableWidget extends BaseReportsWidget
 
     public function init()
     {
-        $this->hasResults = (bool)count($this->data);
+        $this->noOfRecords = count($this->data);
+        $this->hasResults = (bool)$this->noOfRecords;
+
         parent::init();
     }
 
@@ -42,7 +46,7 @@ class ReportTableWidget extends BaseReportsWidget
      */
     public function run()
     {
-        $this->renderButtons();
+        $this->renderHeader();
 
         if (!$this->hasResults) {
             echo EmptyStateWidget::widget([
@@ -52,6 +56,11 @@ class ReportTableWidget extends BaseReportsWidget
             return;
         }
 
+        $this->renderTable();
+    }
+
+    private function renderTable()
+    {
         $this->columnHeaders = array_keys(current($this->data));
 
         echo $this->beginDiv('grid-view');
@@ -91,25 +100,50 @@ class ReportTableWidget extends BaseReportsWidget
         echo Html::endTag('tbody');
     }
 
+    private function renderHeader()
+    {
+        echo $this->beginDiv('row form-group');
+
+        $this->renderResultCount();
+        $this->renderButtons();
+
+        echo $this->endDiv();
+    }
+
+    private function renderResultCount()
+    {
+        echo $this->beginDiv('col-sm-6 col-xs-12');
+
+        echo Html::tag(
+            'b',
+            $this->noOfRecords . ' record(s) returned'
+        );
+
+        echo $this->endDiv();
+    }
+
     /**
      * @author Olawale Lawal <wale@cottacush.com>
      * @throws \Exception
      */
     public function renderButtons()
     {
-        echo $this->beginDiv('row form-group');
-        echo $this->beginDiv('col-sm-6 col-xs-12 col-sm-offset-6 text-right');
-        echo Html::a(
-            Html::baseIcon('fa fa-edit') . ' Edit Filters',
-            null,
-            [
-                'class' => 'btn btn-sm content-header-btn btn-primary',
-                'data' => [
-                    'toggle' => 'modal', 'target' => '#' . $this->editFilterModalId,
+        echo $this->beginDiv('col-sm-6 col-xs-12 text-right');
+
+        if ($this->hasPlaceholders) {
+            echo Html::a(
+                Html::baseIcon('fa fa-edit') . ' Edit Filters',
+                null,
+                [
+                    'class' => 'btn btn-sm content-header-btn btn-primary',
+                    'data' => [
+                        'toggle' => 'modal', 'target' => '#' . $this->editFilterModalId,
+                    ]
                 ]
-            ]
-        );
-        echo '&nbsp;';
+            );
+            echo '&nbsp;';
+        }
+
         if ($this->hasResults) {
             echo Html::a(
                 Html::baseIcon('fa fa-download') . ' Download CSV',
@@ -120,7 +154,6 @@ class ReportTableWidget extends BaseReportsWidget
                 ]
             );
         }
-        echo $this->endDiv();
         echo $this->endDiv();
 
         echo SQLReportFilterModalWidget::widget([
