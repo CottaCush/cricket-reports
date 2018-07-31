@@ -116,7 +116,7 @@ class ReportTableWidget extends BaseReportsWidget
 
         echo Html::tag(
             'b',
-            $this->noOfRecords . ' ' . BaseInflector::pluralize('records') . ' found'
+            $this->noOfRecords . ' ' . BaseInflector::pluralize('record') . ' found'
         );
 
         echo $this->endDiv();
