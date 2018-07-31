@@ -16,12 +16,14 @@ use yii\helpers\Url;
 class ReportErrorWidget extends BaseReportsWidget
 {
     public $icon = 'frown-o';
-    public $title = 'The report you requested could not be generated. See the executed query below:';
+    public $title = 'The report you requested could not be generated.';
+    public $subtitle = 'See the executed query below:';
     public $details;
     public $report;
     public $executedQuery;
     public $canEditQuery = false;
     public $showTechnicalDetails = false;
+    public $editQueryLink = null;
 
     public function init()
     {
@@ -48,6 +50,7 @@ class ReportErrorWidget extends BaseReportsWidget
             return;
         }
 
+        echo Html::tag('h2', $this->subtitle, ['class' => 'report-error__title']);
         echo $this->beginDiv('report-error__technical-details');
         echo Html::tag(
             'p',
@@ -61,13 +64,13 @@ class ReportErrorWidget extends BaseReportsWidget
 
     private function renderQueryEditorLink()
     {
-        if ($this->canEditQuery) {
+        if (!$this->canEditQuery) {
             return;
         }
 
         echo Html::a(
             'Edit Reports',
-            Url::toRoute(['/report/edit/', 'id' => ArrayHelper::getValue($this->report, 'id')]),
+            $this->editQueryLink,
             ['class' => 'btn btn-primary']
         );
     }
