@@ -5,7 +5,6 @@ namespace CottaCush\Cricket\Report\Widgets;
 use CottaCush\Cricket\Report\Interfaces\Queryable;
 use CottaCush\Yii2\Helpers\Html;
 use CottaCush\Yii2\Widgets\EmptyStateWidget;
-use yii\helpers\BaseInflector;
 use yii\helpers\Url;
 
 /**
@@ -30,6 +29,7 @@ class ReportTableWidget extends BaseReportsWidget
     public $hasPlaceholders = false;
     private $hasResults;
     public $editFilterModalId = 'editFiltersModal';
+    public $downloadLink = '/reports/download';
 
     public function init()
     {
@@ -147,7 +147,7 @@ class ReportTableWidget extends BaseReportsWidget
         if ($this->hasResults) {
             echo Html::a(
                 Html::baseIcon('fa fa-download') . ' Download CSV',
-                Url::toRoute('download'),
+                Url::toRoute($this->downloadLink),
                 [
                     'class' => 'btn btn-sm content-header-btn btn-primary',
                     'data' => []
