@@ -32,6 +32,7 @@ class ReportTableWidget extends BaseReportsWidget
     private $hasResults;
     public $editFilterModalId = 'editFiltersModal';
     public $downloadLink = '/reports/download';
+    public $canDownload = true;
 
     public function init()
     {
@@ -146,7 +147,7 @@ class ReportTableWidget extends BaseReportsWidget
             echo '&nbsp;';
         }
 
-        if ($this->hasResults) {
+        if ($this->hasResults && $this->canDownload) {
             $id = ArrayHelper::getValue($this->report, 'id');
             $id = Utils::encodeId($id);
 
