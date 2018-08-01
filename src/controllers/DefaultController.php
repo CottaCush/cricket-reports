@@ -2,20 +2,22 @@
 
 namespace CottaCush\Cricket\Report\Controllers;
 
+use CottaCush\Cricket\Report\Constants\ErrorCodes;
 use CottaCush\Cricket\Report\Constants\Messages;
 use CottaCush\Cricket\Report\Exceptions\SQLReportGenerationException;
 use CottaCush\Cricket\Report\Generators\SQLReportGenerator;
 use CottaCush\Cricket\Report\Generators\SQLReportQueryBuilder;
 use CottaCush\Cricket\Report\Libs\Utils;
 use CottaCush\Cricket\Report\Models\Report;
+use Exception;
 use Yii;
 use yii\data\ActiveDataProvider;
-use yii\data\SqlDataProvider;
+use yii\data\ArrayDataProvider;
 use yii2tech\csvgrid\CsvGrid;
 
 class DefaultController extends BaseReportsController
 {
-    const SQL_QUERY_KEY = 'SQL_QUERY';
+    const SQL_QUERY_KEY = '_sql_query_';
 
     /**
      * @author Taiwo Ladipo <taiwo.ladipo@cottacush.com>
@@ -34,8 +36,11 @@ class DefaultController extends BaseReportsController
             ],
         ]);
 
-
-        return $this->render('index', ['reports' => $dataProvider]);
+        try {
+            return $this->render('index', ['reports' => $dataProvider]);
+        } catch (Exception $exception) {
+            return $this->renderException($exception);
+        }
     }
 
     /**
@@ -45,10 +50,10 @@ class DefaultController extends BaseReportsController
      */
     public function actionView($id = null)
     {
-        $id = Utils::decodeId($id);
+        $reportId = Utils::decodeId($id);
 
         /** @var Report $report */
-        $report = Report::findOne($id);
+        $report = Report::findOne($reportId);
 
         if (!$report) {
             return $this->returnNotification(
@@ -91,36 +96,63 @@ class DefaultController extends BaseReportsController
             }
         }
 
-        Yii::$app->session->set(self::SQL_QUERY_KEY, $query);
+        $this->getSession()->set(self::SQL_QUERY_KEY . $id, $query);
 
         return $this->render('view', [
-            'report' => $report, 'data' => $data, 'hasPlaceholders' => $hasPlaceholders,
+            'report' => $report, 'data' => $data, 'hasPlaceholders' => $hasPlaceholders, 'encodedId' => $id,
             'hasPlaceholdersReplaced' => $hasPlaceholdersReplaced, 'values' => $placeholderValues
         ]);
     }
 
     /**
      * @author Olawale Lawal <wale@cottacush.com>
-     * @return \yii\web\Response
+     * @param $id
+     * @return string|\yii\web\Response
      * @throws \yii\base\InvalidConfigException
      */
-    public function actionDownload()
+    public function actionDownload($id)
     {
-        $query = $this->getSession()->get(self::SQL_QUERY_KEY);
+        $query = $this->getSession()->get(self::SQL_QUERY_KEY . $id, null);
 
         if (!$query) {
             return $this->returnNotification(
                 self::FLASH_ERROR_KEY,
-                'Please specify and process the report',
-                ''
+                'Please specify and process the report'
             );
         }
 
-        $exporter = new CsvGrid([
-            'dataProvider' => new SqlDataProvider([
-                'sql' => $query,
-            ]),
-        ]);
-        return $exporter->export()->send('reports.csv');
+        try {
+            $exporter = new CsvGrid([
+                'dataProvider' => new ArrayDataProvider([
+                    'allModels' => Yii::$app->db->createCommand($query)->queryAll()
+                ]),
+            ]);
+            return $exporter->export()->send('reports.csv');
+        } catch (\yii\db\Exception $e) {
+            return $this->renderException($e);
+        }
+    }
+
+
+    /**
+     * @author Olawale Lawal <wale@cottacush.com>
+     * @param Exception $exception
+     * @return string
+     */
+    private function renderException(Exception $exception)
+    {
+        $message = $exception->getMessage();
+        $title = 'Reports';
+        $icon = 'exclamation-triangle';
+
+        if ($exception->getCode() == ErrorCodes::MYSQL_NO_DATABASE) {
+            $message = 'Database not found';
+            $title = null;
+        } elseif ($exception->getCode() == ErrorCodes::MYSQL_NO_TABLE) {
+            $message = 'You have no published reports';
+            $icon = 'file-text';
+        }
+
+        return $this->render('exception', ['message' => $message, 'title' => $title, 'icon' => $icon]);
     }
 }
