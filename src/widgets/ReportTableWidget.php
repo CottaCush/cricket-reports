@@ -3,8 +3,10 @@
 namespace CottaCush\Cricket\Report\Widgets;
 
 use CottaCush\Cricket\Report\Interfaces\Queryable;
+use CottaCush\Cricket\Report\Libs\Utils;
 use CottaCush\Yii2\Helpers\Html;
 use CottaCush\Yii2\Widgets\EmptyStateWidget;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 
 /**
@@ -30,6 +32,7 @@ class ReportTableWidget extends BaseReportsWidget
     private $hasResults;
     public $editFilterModalId = 'editFiltersModal';
     public $downloadLink = '/reports/download';
+    public $canDownload = true;
 
     public function init()
     {
@@ -100,6 +103,7 @@ class ReportTableWidget extends BaseReportsWidget
         echo Html::endTag('tbody');
     }
 
+
     private function renderHeader()
     {
         echo $this->beginDiv('row form-group');
@@ -116,7 +120,7 @@ class ReportTableWidget extends BaseReportsWidget
 
         echo Html::tag(
             'b',
-            $this->noOfRecords . ' record(s) returned'
+            $this->noOfRecords . ' record' . ($this->noOfRecords == 1 ? '' : 's') . ' returned'
         );
 
         echo $this->endDiv();
@@ -124,7 +128,6 @@ class ReportTableWidget extends BaseReportsWidget
 
     /**
      * @author Olawale Lawal <wale@cottacush.com>
-     * @throws \Exception
      */
     public function renderButtons()
     {
@@ -144,17 +147,22 @@ class ReportTableWidget extends BaseReportsWidget
             echo '&nbsp;';
         }
 
-        if ($this->hasResults) {
+        if ($this->hasResults && $this->canDownload) {
+            $id = ArrayHelper::getValue($this->report, 'id');
+            $id = Utils::encodeId($id);
+
             echo Html::a(
                 Html::baseIcon('fa fa-download') . ' Download CSV',
-                Url::toRoute($this->downloadLink),
+                Url::toRoute([$this->downloadLink, 'id' => $id]),
                 [
                     'class' => 'btn btn-sm content-header-btn btn-primary',
                     'data' => []
                 ]
             );
         }
+
         echo $this->endDiv();
+
 
         echo SQLReportFilterModalWidget::widget([
             'id' => $this->editFilterModalId, 'model' => $this->report, 'data' => $this->placeholderValues,
