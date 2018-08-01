@@ -162,9 +162,12 @@ class ReportTableWidget extends BaseReportsWidget
 
         echo $this->endDiv();
 
-        echo SQLReportFilterModalWidget::widget([
-            'id' => $this->editFilterModalId, 'model' => $this->report, 'data' => $this->placeholderValues,
-            'route' => Url::current()
-        ]);
+        try {
+            echo SQLReportFilterModalWidget::widget([
+                'id' => $this->editFilterModalId, 'model' => $this->report, 'data' => $this->placeholderValues,
+                'route' => Url::current()
+            ]);
+        } catch (\Exception $e) {
+        }
     }
 }
