@@ -18,6 +18,7 @@ class PlaceholderType extends BaseReportsModel
     const TYPE_BOOLEAN = 'boolean';
     const TYPE_DATE = 'date';
     const TYPE_TEXT = 'text';
+    const TYPE_SESSION = 'session-variable';
 
     const BOOLEAN_VALUES_MAP = [
         '1' => 'Yes',

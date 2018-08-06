@@ -57,11 +57,12 @@ class Report extends BaseReportsModel implements Queryable
 
     /**
      * @author Taiwo Ladipo <taiwo.ladipo@cottacush.com>
+     * @param null $filters
      * @return \yii\db\ActiveQuery
      */
-    public static function getReports()
+    public static function getReports($filters = null)
     {
-        return self::find();
+        return self::find()->andFilterWhere($filters);
     }
 
     public function getQuery()
