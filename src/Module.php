@@ -7,6 +7,11 @@ use yii\base\InvalidConfigException;
 use yii\base\Module as BaseModule;
 use yii\db\Connection;
 
+/**
+ * Class Module
+ * @package CottaCush\Cricket\Report
+ * @author Olawale Lawal <wale@cottacush.com>
+ */
 class Module extends BaseModule
 {
     public $controllerNamespace = 'CottaCush\Cricket\Report\Controllers';
@@ -32,6 +37,10 @@ class Module extends BaseModule
         $this->params['permissionValues'] = $this->getReportPermissionFilter();
     }
 
+    /**
+     * @author Olawale Lawal <wale@cottacush.com>
+     * @return mixed|null
+     */
     public function getReportPermissionFilter()
     {
         $values = null;
