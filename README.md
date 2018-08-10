@@ -45,8 +45,8 @@ If you discover any security related issues, please email <developers@cottacush.
 
 ## Credits
 
-- [Taiwo Ladipo][link-author-taiwo]
-- [Olawale Lawal][link-author-olawale]
+- [Taiwo Ladipo](https://github.com/taiwo-ladipo)
+- [Olawale Lawal](https://github.com/netwox)
 - [All Contributors][link-contributors]
 
 ## License
@@ -65,7 +65,5 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [link-scrutinizer]: https://scrutinizer-ci.com/g/cottacush/cricket-reports/code-structure
 [link-code-quality]: https://scrutinizer-ci.com/g/cottacush/cricket-reports
 [link-downloads]: https://packagist.org/packages/cottacush/cricket-reports
-[link-author-taiwo]: https://github.com/olajideoye
-[link-author-olawale]: https://github.com/netwox
 [link-contributors]: ../../contributors
 [link-fxp-composer-asset-plugin]: https://packagist.org/packages/fxp/composer-asset-plugin
