@@ -13,6 +13,7 @@ use Exception;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
+use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 use yii2tech\csvgrid\CsvGrid;
 
@@ -27,15 +28,24 @@ class DefaultController extends BaseReportsController
     public function actionIndex()
     {
         $permissionValues = ArrayHelper::getValue($this->module, 'params.permissionValues', []);
-        $permissionValues = array_filter($permissionValues, 'strlen');
+
+        if (is_array($permissionValues)) {
+            $permissionValues = array_filter($permissionValues, 'strlen');
+        }
+
         $column = [];
 
-        if (is_array($permissionValues) && !empty($permissionValues)) {
+        if (is_scalar($permissionValues)) {
+            $permissionValues = [$permissionValues];
+        }
+
+        if (!empty($permissionValues)) {
             foreach ($permissionValues as $value) {
                 $column[] = "FIND_IN_SET('" . $value . "', `permission_values`)";
             }
 
             $column = implode(' OR ', $column);
+            $column = new Expression($column);
         }
 
         $dataProvider = new ActiveDataProvider([
