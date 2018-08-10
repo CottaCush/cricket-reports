@@ -27,7 +27,7 @@ class SQLReportQueryBuilder
         $query = $this->report->getQuery();
 
         foreach ($this->data as $key => $value) {
-            $query = str_replace($key, "'$value'", $query);
+            $query = str_replace($key, $value, $query);
         }
 
         return $query;
