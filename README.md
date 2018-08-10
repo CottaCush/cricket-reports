@@ -45,26 +45,25 @@ If you discover any security related issues, please email <developers@cottacush.
 
 ## Credits
 
-- [Taiwo Ladipo][link-author]
-- [Olawale Lawal][link-author]
+- [Taiwo Ladipo](https://github.com/taiwo-ladipo)
+- [Olawale Lawal](https://github.com/netwox)
 - [All Contributors][link-contributors]
 
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/cottacush/yii2-widgets.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/cottacush/cricket-reports.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/cottacush/yii2-widgets/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/cottacush/yii2-widgets.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/cottacush/yii2-widgets.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/cottacush/yii2-widgets.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/cottacush/cricket-reports/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/cottacush/cricket-reports.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/cottacush/cricket-reports.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/cottacush/cricket-reports.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/cottacush/yii2-widgets
-[link-travis]: https://travis-ci.org/cottacush/yii2-widgets
-[link-scrutinizer]: https://scrutinizer-ci.com/g/cottacush/yii2-widgets/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/cottacush/yii2-widgets
-[link-downloads]: https://packagist.org/packages/cottacush/yii2-widgets
-[link-author]: https://github.com/olajideoye
+[link-packagist]: https://packagist.org/packages/cottacush/cricket-reports
+[link-travis]: https://travis-ci.org/cottacush/cricket-reports
+[link-scrutinizer]: https://scrutinizer-ci.com/g/cottacush/cricket-reports/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/cottacush/cricket-reports
+[link-downloads]: https://packagist.org/packages/cottacush/cricket-reports
 [link-contributors]: ../../contributors
 [link-fxp-composer-asset-plugin]: https://packagist.org/packages/fxp/composer-asset-plugin

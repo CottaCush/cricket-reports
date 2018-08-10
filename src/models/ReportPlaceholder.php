@@ -23,7 +23,7 @@ class ReportPlaceholder extends BaseReportsModel implements Replaceable
      */
     public static function tableName()
     {
-        return '{{%report_placeholders}}';
+        return '{{%_report_placeholders}}';
     }
 
     /**

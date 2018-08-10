@@ -2,8 +2,8 @@
 
 namespace CottaCush\Cricket\Report\Generators;
 
-use CottaCush\Cricket\Report\Models\PlaceholderType;
 use CottaCush\Cricket\Report\Interfaces\Replaceable;
+use CottaCush\Cricket\Report\Models\PlaceholderType;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
@@ -37,6 +37,10 @@ class SQLReportFilterFactory
             case PlaceholderType::TYPE_DATE:
                 return Html::label($description, $name, ['class' => 'control-label']) .
                     Html::textInput($name, $value, ['class' => 'form-control date-picker']);
+                break;
+
+            case PlaceholderType::TYPE_SESSION:
+                return Html::hiddenInput($name, ArrayHelper::getValue(\Yii::$app->session, $description));
                 break;
 
             default:
