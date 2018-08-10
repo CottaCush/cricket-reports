@@ -62,7 +62,7 @@ class Report extends BaseReportsModel implements Queryable
      */
     public static function getReports($filters = null)
     {
-        return self::find()->andFilterWhere($filters);
+        return self::find()->where($filters);
     }
 
     public function getQuery()
