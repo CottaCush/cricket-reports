@@ -25,7 +25,7 @@ class Report extends BaseReportsModel implements Queryable
      */
     public static function tableName()
     {
-        return '{{%reports}}';
+        return '{{%_reports}}';
     }
 
     /**
