@@ -8,7 +8,7 @@
       "report template",
       "admin portal"
     ],
-    "homepage": "https://github.com/cottacush/yii2-widgets",
+    "homepage": "https://github.com/cottacush/cricket-reports",
     "type": "library",
     "license": "MIT",
     "minimum-stability": "stable",
