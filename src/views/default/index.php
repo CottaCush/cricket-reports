@@ -25,8 +25,8 @@ else :
                 'class' => 'yii\grid\SerialColumn',
                 'header' => 'S/N'
             ],
-            'name:text:Name',
-            'description:text:Description',
+            'name:text:NAME',
+            'description:text:DESCRIPTION',
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => 'ACTION',

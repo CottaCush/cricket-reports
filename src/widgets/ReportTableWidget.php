@@ -84,7 +84,7 @@ class ReportTableWidget extends BaseReportsWidget
         echo Html::beginTag('thead');
         echo Html::beginTag('tr');
         foreach ($this->columnHeaders as $columnHeader) {
-            echo Html::tag('th', str_replace('_', ' ', $columnHeader));
+            echo Html::tag('th', strtoupper(str_replace('_', ' ', $columnHeader)));
         }
         echo Html::endTag('tr');
         echo Html::endTag('thead');

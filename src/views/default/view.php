@@ -22,9 +22,11 @@ $title = $this->title . ' ' .
 
 echo Html::beginTag('div', ['class' => 'reports-wrapper']);
 if ($hasPlaceholders && !$hasPlaceholdersReplaced) {
+    echo Html::beginTag('div', ['class' => 'reports-filter-wrapper']);
     echo SQLReportFilterWidget::widget([
         'report' => $report
     ]);
+    echo Html::endTag('div');
 } else {
     echo ReportTableWidget::widget([
         'data' => $data, 'report' => $report, 'hasPlaceholders' => $hasPlaceholders, 'placeholderValues' => $values,
