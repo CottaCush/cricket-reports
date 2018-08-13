@@ -20,6 +20,7 @@ $title = $this->title . ' ' .
         ]
     );
 
+echo Html::beginTag('div', ['class' => 'reports-wrapper']);
 if ($hasPlaceholders && !$hasPlaceholdersReplaced) {
     echo SQLReportFilterWidget::widget([
         'report' => $report
@@ -29,3 +30,4 @@ if ($hasPlaceholders && !$hasPlaceholdersReplaced) {
         'data' => $data, 'report' => $report, 'hasPlaceholders' => $hasPlaceholders, 'placeholderValues' => $values,
     ]);
 }
+echo Html::endTag('div');
