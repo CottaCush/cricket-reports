@@ -40,7 +40,19 @@ class SQLReportFilterFactory
                 break;
 
             case PlaceholderType::TYPE_SESSION:
-                return Html::hiddenInput($name, ArrayHelper::getValue(\Yii::$app->session, $description));
+                $description = explode('.', $description);
+                $session = \Yii::$app->session;
+
+                if (count($description)) {
+                    $session = \Yii::$app->session->get($description[0]);
+                    unset($description[0]);
+                }
+
+                $description = implode('.', $description);
+                if (unserialize($session)) {
+                    $session = unserialize($session);
+                }
+                return Html::hiddenInput($name, ArrayHelper::getValue($session, $description));
                 break;
 
             default:
