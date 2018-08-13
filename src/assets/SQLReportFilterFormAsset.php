@@ -14,6 +14,10 @@ class SQLReportFilterFormAsset extends BaseReportsAsset
         'widgets/report-filter-form.js'
     ];
 
+    public $css = [
+        'css/reports.css'
+    ];
+
     public $depends = [
         'CottaCush\Cricket\Report\Assets\DatePickerAsset',
     ];
