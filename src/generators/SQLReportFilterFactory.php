@@ -56,7 +56,8 @@ class SQLReportFilterFactory
                 if (unserialize($session)) {
                     $session = unserialize($session);
                 }
-                return Html::hiddenInput($name, ArrayHelper::getValue($session, $description));
+                return Html::hiddenInput($name, ArrayHelper::getValue($session, trim($description)));
+
                 break;
 
             default:
