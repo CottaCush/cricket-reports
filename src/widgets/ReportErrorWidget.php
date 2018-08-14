@@ -2,10 +2,9 @@
 
 namespace CottaCush\Cricket\Report\Widgets;
 
+use CottaCush\Cricket\Report\Assets\SQLReportErrorAsset;
 use CottaCush\Yii2\Assets\FontAwesomeAsset;
 use CottaCush\Yii2\Helpers\Html;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Url;
 
 /**
  * Class ReportErrorWidget
@@ -28,6 +27,7 @@ class ReportErrorWidget extends BaseReportsWidget
     public function init()
     {
         FontAwesomeAsset::register($this->view);
+        SQLReportErrorAsset::register($this->view);
         parent::init();
     }
 
