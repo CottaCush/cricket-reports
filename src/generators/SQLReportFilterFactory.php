@@ -30,13 +30,17 @@ class SQLReportFilterFactory
 
         switch ($type) {
             case PlaceholderType::TYPE_BOOLEAN:
-                return Html::tag('label', $description, ['class' => 'control-label']) .
-                    Html::radioList($name, $value, PlaceholderType::BOOLEAN_VALUES_MAP);
+                return Html::beginTag('div', ['class' => 'form-group col-sm-6']).
+                    Html::tag('label', $description, ['class' => 'control-label']) .
+                    Html::radioList($name, $value, PlaceholderType::BOOLEAN_VALUES_MAP) .
+                    Html::endTag('div');
                 break;
 
             case PlaceholderType::TYPE_DATE:
-                return Html::label($description, $name, ['class' => 'control-label']) .
-                    Html::textInput($name, $value, ['class' => 'form-control date-picker']);
+                return Html::beginTag('div', ['class' => 'form-group col-sm-6']).
+                    Html::label($description, $name, ['class' => 'control-label']) .
+                    Html::textInput($name, $value, ['class' => 'form-control date-picker']).
+                    Html::endTag('div');
                 break;
 
             case PlaceholderType::TYPE_SESSION:
@@ -56,8 +60,10 @@ class SQLReportFilterFactory
                 break;
 
             default:
-                return Html::label($description, $name, ['class' => 'control-label']) .
-                    Html::textInput($name, $value, ['class' => 'form-control']);
+                return Html::beginTag('div', ['class' => 'form-group col-sm-6']).
+                    Html::label($description, $name, ['class' => 'control-label']) .
+                    Html::textInput($name, $value, ['class' => 'form-control']) .
+                    Html::endTag('div');
                 break;
         }
     }

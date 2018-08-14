@@ -1233,3 +1233,11 @@
         width: 300px;
     }
 }
+
+.reports-wrapper .report-error {
+    text-align: center;
+    padding: 80px 0;
+}
+.reports-wrapper .report-error__icon {
+    font-size: 80px;
+}

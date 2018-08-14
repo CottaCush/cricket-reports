@@ -74,9 +74,7 @@ class SQLReportFilterWidget extends BaseReportsWidget
         foreach ($placeholders as $placeholder) {
             $factory->setPlaceholder($placeholder);
 
-            echo $this->beginDiv('form-group col-sm-6');
             echo $factory->createWidget(ArrayHelper::getValue($this->data, $placeholder->getName()));
-            echo $this->endDiv();
         }
         echo $this->endDiv();
     }
