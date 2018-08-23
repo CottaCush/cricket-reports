@@ -8,7 +8,7 @@ trait ValueGetter
 {
     public function getSessionVariable($description)
     {
-        $temp = explode('.', $description);
+        $temp = explode('.', trim($description));
         $session = \Yii::$app->session;
 
         if (count($temp) == 1) {
@@ -22,6 +22,6 @@ trait ValueGetter
         if (unserialize($session)) {
             $session = unserialize($session);
         }
-        return ArrayHelper::getValue($session, $description);
+        return ArrayHelper::getValue($session, trim($description));
     }
 }
