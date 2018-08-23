@@ -19,10 +19,13 @@ class SQLReportFilterModalWidget extends BaseModalWidget
     /** @var Queryable */
     public $model;
     public $data;
+    public $database;
 
     public function renderContents()
     {
-        echo SQLReportFilterWidget::widget(['report' => $this->model, 'data' => $this->data, 'isModal' => true]);
+        echo SQLReportFilterWidget::widget([
+            'report' => $this->model, 'data' => $this->data, 'isModal' => true, 'database' => $this->database
+        ]);
         parent::renderContents();
     }
 }

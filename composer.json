@@ -15,7 +15,8 @@
     "require": {
       "cottacush/yii2-widgets": "^1.0",
       "hashids/hashids": "^1.0",
-      "yii2tech/csv-grid": "^1.0"
+      "yii2tech/csv-grid": "^1.0",
+        "kartik-v/yii2-widget-select2": "v2.1.1"
     },
     "authors": [
       {

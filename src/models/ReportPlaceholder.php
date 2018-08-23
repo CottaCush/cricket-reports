@@ -15,6 +15,7 @@ use CottaCush\Cricket\Report\Interfaces\Replaceable;
  *
  * @property PlaceholderType $placeholderType
  * @property Report $report
+ * @property Report $dropdownReport
  */
 class ReportPlaceholder extends BaseReportsModel implements Replaceable
 {
@@ -33,7 +34,7 @@ class ReportPlaceholder extends BaseReportsModel implements Replaceable
     {
         return [
             [['report_id', 'name', 'description', 'placeholder_type'], 'required'],
-            [['report_id'], 'integer'],
+            [['report_id', 'dropdown_report_id'], 'integer'],
             [['name', 'description', 'placeholder_type'], 'string', 'max' => 255],
         ];
     }
@@ -73,5 +74,14 @@ class ReportPlaceholder extends BaseReportsModel implements Replaceable
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * @author Olawale Lawal <wale@cottacush.com>
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDropdownReport()
+    {
+        return $this->hasOne(Report::class, ['id' => 'dropdown_report_id']);
     }
 }
