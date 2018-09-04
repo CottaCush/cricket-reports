@@ -11,4 +11,5 @@ interface Replaceable
     public function getName();
     public function getType();
     public function getDescription();
+    public function getDropdownReport();
 }

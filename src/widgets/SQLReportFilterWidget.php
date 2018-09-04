@@ -27,6 +27,7 @@ class SQLReportFilterWidget extends BaseReportsWidget
     public $btnClass = 'btn btn-md btn-primary';
     public $formRoute;
     public $isModal = false;
+    public $database = null;
 
     public function run()
     {
@@ -68,7 +69,7 @@ class SQLReportFilterWidget extends BaseReportsWidget
             return;
         }
 
-        $factory = new SQLReportFilterFactory();
+        $factory = new SQLReportFilterFactory(null, $this->database);
         /** @var Replaceable $placeholder */
         echo $this->beginDiv('row');
         foreach ($placeholders as $placeholder) {

@@ -26,13 +26,12 @@ class ReportTableWidget extends BaseReportsWidget
     public $emptyResultMsg = 'The query returned an empty data set';
     private $noOfRecords;
 
-    private $columnHeaders;
-
     public $hasPlaceholders = false;
     private $hasResults;
     public $editFilterModalId = 'editFiltersModal';
     public $downloadLink = '/reports/download';
     public $canDownload = true;
+    public $database = null;
 
     public function init()
     {
@@ -64,7 +63,6 @@ class ReportTableWidget extends BaseReportsWidget
 
     private function renderTable()
     {
-        $this->columnHeaders = array_keys(current($this->data));
 
         echo $this->beginDiv('grid-view');
 
@@ -81,9 +79,10 @@ class ReportTableWidget extends BaseReportsWidget
 
     private function renderTableHeader()
     {
+        $columnHeaders = array_keys(current($this->data));
         echo Html::beginTag('thead');
         echo Html::beginTag('tr');
-        foreach ($this->columnHeaders as $columnHeader) {
+        foreach ($columnHeaders as $columnHeader) {
             echo Html::tag('th', strtoupper(str_replace('_', ' ', $columnHeader)));
         }
         echo Html::endTag('tr');
@@ -163,10 +162,11 @@ class ReportTableWidget extends BaseReportsWidget
 
         echo $this->endDiv();
 
-
-        echo SQLReportFilterModalWidget::widget([
-            'id' => $this->editFilterModalId, 'model' => $this->report, 'data' => $this->placeholderValues,
-            'route' => Url::current()
-        ]);
+        if ($this->hasPlaceholders) {
+            echo SQLReportFilterModalWidget::widget([
+                'id' => $this->editFilterModalId, 'model' => $this->report, 'data' => $this->placeholderValues,
+                'route' => Url::current(), 'database' => $this->database
+            ]);
+        }
     }
 }
