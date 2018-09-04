@@ -84,31 +84,35 @@ class SQLReportFilterFactory
 
     /**
      * @author Olawale Lawal <wale@cottacush.com>
+     * @param null $value
      * @return string
-     * @throws \CottaCush\Cricket\Report\Exceptions\SQLReportGenerationException
+     * @throws SQLReportGenerationException
      */
     private function generateDropdown($value = null)
     {
-        /** @var Queryable $report */
-        $report = $this->placeholder->getDropdownReport()->one();
+        /** @var Queryable $dropdownReport */
+        $dropdownReport = $this->placeholder->getDropdownReport()->one(); //Get the report used as dropdown placeholder
         $html = '';
 
-        if (!$report) {
+        if (!$dropdownReport) {
             return $html;
         }
 
-        $placeholders = $report->getPlaceholders();
+        //Get the placeholders of the dropdown report
+        $placeholders = $dropdownReport->getPlaceholders();
 
         if ($placeholders instanceof ActiveQuery) {
             $placeholders = $placeholders->asArray()->all();
         }
 
-        $data = [];
+        //Set the value of each placeholder
+        $placeholderValues = [];
         foreach ($placeholders as $placeholder) {
-            $data[$placeholder['name']] = $this->getSessionVariable($placeholder['description']);
+            $placeholderValues[$placeholder['name']] = $this->getSessionVariable($placeholder['description']);
         }
 
-        $queryBuilder = new SQLReportQueryBuilder($report, $data);
+        //Build the query from the report to get data
+        $queryBuilder = new SQLReportQueryBuilder($dropdownReport, $placeholderValues);
         $generator = new SQLReportGenerator($queryBuilder->buildQuery(), $this->database);
         $data = $generator->generateReport();
 
@@ -116,13 +120,14 @@ class SQLReportFilterFactory
             $data = ArrayHelper::map($data, 'key', 'value');
         }
 
+        //Generate the dropdown from the values
         $html .= Html::beginTag('div', ['class' => 'form-group col-sm-6']) .
-            Html::label($report->name, $this->placeholder->getName(), ['class' => 'control-label']) .
+            Html::label($dropdownReport->name, $this->placeholder->getName(), ['class' => 'control-label']) .
             Select2::widget([
                 'name' => $this->placeholder->getName(),
                 'value' => $value,
                 'data' => $data,
-                'options' => ['multiple' => true, 'placeholder' => 'Select ' . $report->name]
+                'options' => ['multiple' => true, 'placeholder' => 'Select ' . $dropdownReport->name]
             ]) .
             Html::endTag('div');
         return $html;
