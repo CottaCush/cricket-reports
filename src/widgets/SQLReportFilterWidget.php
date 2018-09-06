@@ -29,9 +29,18 @@ class SQLReportFilterWidget extends BaseReportsWidget
     public $isModal = false;
     public $database = null;
 
+    public $excludeBootstrapAssets = false;
+
     public function run()
     {
         SQLReportFilterFormAsset::register($this->view);
+
+        if ($this->excludeBootstrapAssets) {
+            \Yii::$app->assetManager->bundles = [
+                'yii\bootstrap\BootstrapPluginAsset' => false,
+                'yii\bootstrap\BootstrapAsset' => false,
+            ];
+        }
 
         $this->renderHeader();
         $this->renderPlaceholderFields();

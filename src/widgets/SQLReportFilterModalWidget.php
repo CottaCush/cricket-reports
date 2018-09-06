@@ -21,10 +21,13 @@ class SQLReportFilterModalWidget extends BaseModalWidget
     public $data;
     public $database;
 
+    public $excludeBootstrapAssets = false;
+
     public function renderContents()
     {
         echo SQLReportFilterWidget::widget([
-            'report' => $this->model, 'data' => $this->data, 'isModal' => true, 'database' => $this->database
+            'report' => $this->model, 'data' => $this->data, 'isModal' => true, 'database' => $this->database,
+            'excludeBootstrapAssets' => $this->excludeBootstrapAssets
         ]);
         parent::renderContents();
     }
