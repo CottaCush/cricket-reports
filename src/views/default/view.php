@@ -10,6 +10,9 @@ $this->title = ArrayHelper::getValue($report, 'name');
 $this->params['breadcrumbs'] = [
     $report->name,
 ];
+
+$excludeBootstrapAssets = isset($excludeBootstrapAssets);
+
 $title = $this->title . ' ' .
     Html::tag(
         'span',
@@ -23,11 +26,12 @@ $title = $this->title . ' ' .
 echo Html::beginTag('div', ['class' => 'reports-wrapper']);
 if ($hasPlaceholders && !$hasPlaceholdersReplaced) {
     echo SQLReportFilterWidget::widget([
-        'report' => $report
+        'report' => $report,'excludeBootstrapAssets' => $excludeBootstrapAssets
     ]);
 } else {
     echo ReportTableWidget::widget([
         'data' => $data, 'report' => $report, 'hasPlaceholders' => $hasPlaceholders, 'placeholderValues' => $values,
+        'excludeBootstrapAssets' => $excludeBootstrapAssets
     ]);
 }
 echo Html::endTag('div');

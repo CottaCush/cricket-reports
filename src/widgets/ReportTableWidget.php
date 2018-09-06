@@ -33,6 +33,8 @@ class ReportTableWidget extends BaseReportsWidget
     public $canDownload = true;
     public $database = null;
 
+    public $excludeBootstrapAssets = false;
+
     public function init()
     {
         $this->noOfRecords = count($this->data);
@@ -165,7 +167,8 @@ class ReportTableWidget extends BaseReportsWidget
         if ($this->hasPlaceholders) {
             echo SQLReportFilterModalWidget::widget([
                 'id' => $this->editFilterModalId, 'model' => $this->report, 'data' => $this->placeholderValues,
-                'route' => Url::current(), 'database' => $this->database
+                'route' => Url::current(), 'database' => $this->database,
+                'excludeBootstrapAssets' => $this->excludeBootstrapAssets
             ]);
         }
     }
