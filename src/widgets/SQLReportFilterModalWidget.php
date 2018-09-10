@@ -15,6 +15,7 @@ class SQLReportFilterModalWidget extends BaseModalWidget
     public $title = 'Edit Filters';
     public $footerSubmit = 'Apply Filters';
     public $formMethod = 'post';
+    public $formOptions = ['data-toggle' => 'validator'];
 
     /** @var Queryable */
     public $model;

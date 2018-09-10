@@ -42,14 +42,24 @@ class SQLReportFilterFactory
             case PlaceholderType::TYPE_BOOLEAN:
                 return Html::beginTag('div', ['class' => 'form-group col-sm-6']) .
                     Html::tag('label', $description, ['class' => 'control-label']) .
-                    Html::radioList($name, $value, PlaceholderType::BOOLEAN_VALUES_MAP) .
+                    Html::radioList($name, $value, PlaceholderType::BOOLEAN_VALUES_MAP, [
+                        'item' => function ($index, $label, $name, $checked, $value) {
+                            $return = '<label class="cricket-radio-inline">';
+                            $return .= '<input type="radio" name="' . $name . '" value="' . $value .
+                                '" checked="' . $checked . '" required>';
+                            $return .= ucwords($label);
+                            $return .= '</label>';
+
+                            return $return;
+                        },
+                    ]) .
                     Html::endTag('div');
                 break;
 
             case PlaceholderType::TYPE_DATE:
                 return Html::beginTag('div', ['class' => 'form-group col-sm-6']) .
                     Html::label($description, $name, ['class' => 'control-label']) .
-                    Html::textInput($name, $value, ['class' => 'form-control date-picker']) .
+                    Html::textInput($name, $value, ['class' => 'form-control date-picker', 'required' => true]) .
                     Html::endTag('div');
                 break;
 
@@ -67,7 +77,7 @@ class SQLReportFilterFactory
             default:
                 return Html::beginTag('div', ['class' => 'form-group col-sm-6']) .
                     Html::label($description, $name, ['class' => 'control-label']) .
-                    Html::textInput($name, $value, ['class' => 'form-control']) .
+                    Html::textInput($name, $value, ['class' => 'form-control', 'required' => true]) .
                     Html::endTag('div');
                 break;
         }
@@ -127,7 +137,10 @@ class SQLReportFilterFactory
                 'name' => $this->placeholder->getName(),
                 'value' => $value,
                 'data' => $data,
-                'options' => ['multiple' => true, 'placeholder' => 'Select ' . $dropdownReport->name]
+                'options' => [
+                    'multiple' => true, 'placeholder' => 'Select ' . $dropdownReport->name, 'required' => true,
+                    'data-error' => 'Choose an operation'
+                ]
             ]) .
             Html::endTag('div');
         return $html;

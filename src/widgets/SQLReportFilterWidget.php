@@ -63,7 +63,7 @@ class SQLReportFilterWidget extends BaseReportsWidget
         echo Html::beginTag('div', ['class' => 'col-sm-6']);
         echo Html::tag('h3', $this->title);
         echo Html::tag('br');
-        echo Html::beginForm($this->formRoute, 'post', ['class' => 'sql-filter-form']);
+        echo Html::beginForm($this->formRoute, 'post', ['class' => 'sql-filter-form', 'data-toggle' => 'validator']);
     }
 
     private function renderPlaceholderFields()

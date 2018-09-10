@@ -11,7 +11,8 @@ namespace CottaCush\Cricket\Report\Assets;
 class SQLReportFilterFormAsset extends BaseReportsAsset
 {
     public $js = [
-        'widgets/report-filter-form.js'
+        'widgets/report-filter-form.js',
+        'plugins/bootstrap-validator/dist/validator.min.js'
     ];
 
     public $css = [
