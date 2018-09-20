@@ -6,8 +6,6 @@ use CottaCush\Cricket\Report\Constants\ErrorCodes;
 use CottaCush\Cricket\Report\Constants\Messages;
 use CottaCush\Cricket\Report\Exceptions\SQLReportGenerationException;
 use CottaCush\Cricket\Report\Generators\SQLQueryBuilderParser;
-use CottaCush\Cricket\Report\Generators\SQLReportGenerator;
-use CottaCush\Cricket\Report\Generators\SQLReportQueryBuilder;
 use CottaCush\Cricket\Report\Libs\Utils;
 use CottaCush\Cricket\Report\Models\Report;
 use Exception;
@@ -93,12 +91,12 @@ class DefaultController extends BaseReportsController
             $parser = new SQLQueryBuilderParser();
             $parser->parse($report, $data, $placeholderValues);
         } catch (SQLReportGenerationException $ex) {
-            return $this->render($this->viewPath . 'error', ['report' => $report, 'details' => $ex->getMessage()]);
+            return $this->render('error', ['report' => $report, 'details' => $ex->getMessage()]);
         }
 
         $this->getSession()->set(self::SQL_QUERY_KEY . $id, $parser->query);
 
-        return $this->render($this->viewPath . 'view', [
+        return $this->render('view', [
             'report' => $report, 'data' => $data, 'hasPlaceholders' => $parser->hasInputPlaceholders(), 'encodedId' => $id,
             'hasPlaceholdersReplaced' => $parser->arePlaceholdersReplaced(), 'values' => $placeholderValues,
         ]);
