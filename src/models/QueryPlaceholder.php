@@ -2,29 +2,29 @@
 
 namespace CottaCush\Cricket\Report\Models;
 
-use CottaCush\Cricket\Report\Interfaces\Replaceable;
+use CottaCush\Cricket\Report\Interfaces\PlaceholderInterface;
 
 /**
- * This is the model class for table "report_placeholders".
+ * This is the model class for table "query_placeholders".
  *
  * @property int $id
- * @property int $report_id
+ * @property int $query_id
  * @property string $name
  * @property string $description
  * @property string $placeholder_type
  *
  * @property PlaceholderType $placeholderType
- * @property Report $report
- * @property Report $dropdownReport
+ * @property Query $query
+ * @property Query $dropdownQuery
  */
-class ReportPlaceholder extends BaseReportsModel implements Replaceable
+class QueryPlaceholder extends BaseReportsModel implements PlaceholderInterface
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return '{{%_report_placeholders}}';
+        return '{{%_query_placeholders}}';
     }
 
     /**
@@ -33,8 +33,8 @@ class ReportPlaceholder extends BaseReportsModel implements Replaceable
     public function rules()
     {
         return [
-            [['report_id', 'name', 'description', 'placeholder_type'], 'required'],
-            [['report_id', 'dropdown_report_id'], 'integer'],
+            [['query_id', 'name', 'description', 'placeholder_type'], 'required'],
+            [['query_id', 'dropdown_query_id'], 'integer'],
             [['name', 'description', 'placeholder_type'], 'string', 'max' => 255],
         ];
     }
@@ -46,7 +46,7 @@ class ReportPlaceholder extends BaseReportsModel implements Replaceable
     {
         return [
             'id' => 'ID',
-            'report_id' => 'Report ID',
+            'query_id' => 'Query ID',
             'name' => 'Name',
             'description' => 'Description',
             'placeholder_type' => 'Placeholder Type',
@@ -56,9 +56,9 @@ class ReportPlaceholder extends BaseReportsModel implements Replaceable
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getReport()
+    public function getQuery()
     {
-        return $this->hasOne(Report::class, ['id' => 'report_id']);
+        return $this->hasOne(Query::class, ['id' => 'query_id']);
     }
 
     public function getName()
@@ -80,8 +80,8 @@ class ReportPlaceholder extends BaseReportsModel implements Replaceable
      * @author Olawale Lawal <wale@cottacush.com>
      * @return \yii\db\ActiveQuery
      */
-    public function getDropdownReport()
+    public function getDropdownQuery()
     {
-        return $this->hasOne(Report::class, ['id' => 'dropdown_report_id']);
+        return $this->hasOne(Query::class, ['id' => 'dropdown_query_id']);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace CottaCush\Cricket\Report\Widgets;
 
-use CottaCush\Cricket\Report\Interfaces\Queryable;
+use CottaCush\Cricket\Report\Interfaces\CricketQueryableInterface;
 use CottaCush\Cricket\Report\Libs\Utils;
 use CottaCush\Yii2\Helpers\Html;
 use CottaCush\Yii2\Widgets\EmptyStateWidget;
@@ -16,7 +16,7 @@ use yii\helpers\Url;
  */
 class ReportTableWidget extends BaseReportsWidget
 {
-    /** @var Queryable */
+    /** @var CricketQueryableInterface */
     public $report;
 
     public $data = [];

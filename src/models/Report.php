@@ -2,7 +2,7 @@
 
 namespace CottaCush\Cricket\Report\Models;
 
-use CottaCush\Cricket\Report\Interfaces\Queryable;
+use CottaCush\Cricket\Report\Interfaces\CricketQueryableInterface;
 use CottaCush\Cricket\Report\Libs\Utils;
 
 /**
@@ -13,11 +13,10 @@ use CottaCush\Cricket\Report\Libs\Utils;
  * @property string $description
  * @property int $project_id
  * @property string $type
- * @property string $query
  *
- * @property ReportPlaceholder[] placeholders
+ * @property Query $queryObj
  */
-class Report extends BaseReportsModel implements Queryable
+class Report extends BaseReportsModel implements CricketQueryableInterface
 {
 
     /**
@@ -34,7 +33,7 @@ class Report extends BaseReportsModel implements Queryable
     public function rules()
     {
         return [
-            [['name', 'description', 'type', 'query'], 'required'],
+            [['name', 'description', 'type', 'query_id'], 'required'],
             [['description', 'query'], 'string'],
             [['name'], 'string', 'max' => 255],
             [['type', 'status'], 'string', 'max' => 100],
@@ -51,7 +50,7 @@ class Report extends BaseReportsModel implements Queryable
             'name' => 'Report Name',
             'description' => 'Description',
             'type' => 'Type',
-            'query' => 'SQL Query',
+            'query_id' => 'SQL Query',
         ];
     }
 
@@ -67,15 +66,12 @@ class Report extends BaseReportsModel implements Queryable
 
     public function getQuery()
     {
-        return $this->query;
+        return $this->queryObj;
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getPlaceholders()
+    public function getQueryObj()
     {
-        return $this->hasMany(ReportPlaceholder::class, ['report_id' => 'id']);
+        return $this->hasOne(Query::class, ['id' => 'query_id']);
     }
 
     public function getEncodedId()
