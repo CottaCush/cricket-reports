@@ -2,7 +2,7 @@
 
 namespace CottaCush\Cricket\Report\Widgets;
 
-use CottaCush\Cricket\Report\Interfaces\Queryable;
+use CottaCush\Cricket\Report\Interfaces\QueryInterface;
 use CottaCush\Yii2\Widgets\BaseModalWidget;
 
 /**
@@ -17,7 +17,7 @@ class SQLReportFilterModalWidget extends BaseModalWidget
     public $formMethod = 'post';
     public $formOptions = ['data-toggle' => 'validator'];
 
-    /** @var Queryable */
+    /** @var QueryInterface */
     public $model;
     public $data;
     public $database;

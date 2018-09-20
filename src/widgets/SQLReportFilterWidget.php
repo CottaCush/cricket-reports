@@ -4,8 +4,8 @@ namespace CottaCush\Cricket\Report\Widgets;
 
 use CottaCush\Cricket\Report\Assets\SQLReportFilterFormAsset;
 use CottaCush\Cricket\Report\Generators\SQLReportFilterFactory;
-use CottaCush\Cricket\Report\Interfaces\Queryable;
-use CottaCush\Cricket\Report\Interfaces\Replaceable;
+use CottaCush\Cricket\Report\Interfaces\CricketQueryableInterface;
+use CottaCush\Cricket\Report\Interfaces\PlaceholderInterface;
 use CottaCush\Yii2\Helpers\Html;
 use yii\db\ActiveQuery;
 use yii\helpers\ArrayHelper;
@@ -19,7 +19,7 @@ class SQLReportFilterWidget extends BaseReportsWidget
 {
     public $data;
 
-    /** @var Queryable */
+    /** @var CricketQueryableInterface */
     public $report;
 
     public $title = 'Apply Filters';
@@ -68,7 +68,7 @@ class SQLReportFilterWidget extends BaseReportsWidget
 
     private function renderPlaceholderFields()
     {
-        $placeholders = $this->report->getPlaceholders();
+        $placeholders = $this->report->getQuery()->getPlaceholders();
 
         if ($placeholders instanceof ActiveQuery) {
             $placeholders = $placeholders->all();
@@ -79,7 +79,7 @@ class SQLReportFilterWidget extends BaseReportsWidget
         }
 
         $factory = new SQLReportFilterFactory(null, $this->database);
-        /** @var Replaceable $placeholder */
+        /** @var PlaceholderInterface $placeholder */
         echo $this->beginDiv('row');
         foreach ($placeholders as $placeholder) {
             $factory->setPlaceholder($placeholder);

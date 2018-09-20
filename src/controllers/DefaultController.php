@@ -5,8 +5,7 @@ namespace CottaCush\Cricket\Report\Controllers;
 use CottaCush\Cricket\Report\Constants\ErrorCodes;
 use CottaCush\Cricket\Report\Constants\Messages;
 use CottaCush\Cricket\Report\Exceptions\SQLReportGenerationException;
-use CottaCush\Cricket\Report\Generators\SQLReportGenerator;
-use CottaCush\Cricket\Report\Generators\SQLReportQueryBuilder;
+use CottaCush\Cricket\Report\Generators\SQLQueryBuilderParser;
 use CottaCush\Cricket\Report\Libs\Utils;
 use CottaCush\Cricket\Report\Models\Report;
 use Exception;
@@ -84,46 +83,22 @@ class DefaultController extends BaseReportsController
                 Messages::getNotFoundMessage(Messages::ENTITY_REPORT)
             );
         }
-        $hasPlaceholders = $report->getPlaceholders()->exists();
-        $hasPlaceholdersReplaced = false;
+
         $data = [];
         $placeholderValues = $this->getRequest()->post();
-        $query = $report->query;
 
-        if ($this->isPost()) {
-            try {
-                $queryBuilder = new SQLReportQueryBuilder($report, $placeholderValues);
-                $query = $queryBuilder->buildQuery();
-
-                $generator = new SQLReportGenerator($query);
-                $data = $generator->generateReport();
-
-                $hasPlaceholdersReplaced = true;
-            } catch (SQLReportGenerationException $ex) {
-                return $this->render(
-                    'error',
-                    ['report' => $report, 'details' => $ex->getMessage(), 'query' => $query]
-                );
-            }
-        } else {
-            if (!$hasPlaceholders) {
-                try {
-                    $generator = new SQLReportGenerator($query);
-                    $data = $generator->generateReport();
-                } catch (SQLReportGenerationException $ex) {
-                    return $this->render(
-                        'error',
-                        ['report' => $report, 'details' => $ex->getMessage(), 'query' => $query]
-                    );
-                }
-            }
+        try {
+            $parser = new SQLQueryBuilderParser();
+            $parser->parse($report, $data, $placeholderValues);
+        } catch (SQLReportGenerationException $ex) {
+            return $this->render('error', ['report' => $report, 'details' => $ex->getMessage()]);
         }
 
-        $this->getSession()->set(self::SQL_QUERY_KEY . $id, $query);
+        $this->getSession()->set(self::SQL_QUERY_KEY . $id, $parser->query);
 
         return $this->render('view', [
-            'report' => $report, 'data' => $data, 'hasPlaceholders' => $hasPlaceholders, 'encodedId' => $id,
-            'hasPlaceholdersReplaced' => $hasPlaceholdersReplaced, 'values' => $placeholderValues
+            'report' => $report, 'data' => $data, 'hasPlaceholders' => $parser->hasInputPlaceholders(), 'encodedId' => $id,
+            'hasPlaceholdersReplaced' => $parser->arePlaceholdersReplaced(), 'values' => $placeholderValues,
         ]);
     }
 

@@ -3,8 +3,8 @@
 namespace CottaCush\Cricket\Report\Generators;
 
 use CottaCush\Cricket\Report\Exceptions\SQLReportGenerationException;
-use CottaCush\Cricket\Report\Interfaces\Queryable;
-use CottaCush\Cricket\Report\Interfaces\Replaceable;
+use CottaCush\Cricket\Report\Interfaces\QueryInterface;
+use CottaCush\Cricket\Report\Interfaces\PlaceholderInterface;
 use CottaCush\Cricket\Report\Models\PlaceholderType;
 use CottaCush\Cricket\Report\Traits\ValueGetter;
 use kartik\select2\Select2;
@@ -26,7 +26,7 @@ class SQLReportFilterFactory
     public $placeholder;
     public $database;
 
-    public function __construct(Replaceable $placeholder = null, Connection $database = null)
+    public function __construct(PlaceholderInterface $placeholder = null, Connection $database = null)
     {
         $this->database = $database;
         $this->placeholder = $placeholder;
@@ -85,9 +85,9 @@ class SQLReportFilterFactory
 
     /**
      * @author Olawale Lawal <wale@cottacush.com>
-     * @param Replaceable $placeholder
+     * @param PlaceholderInterface $placeholder
      */
-    public function setPlaceholder(Replaceable $placeholder)
+    public function setPlaceholder(PlaceholderInterface $placeholder)
     {
         $this->placeholder = $placeholder;
     }
@@ -100,16 +100,16 @@ class SQLReportFilterFactory
      */
     private function generateDropdown($value = null)
     {
-        /** @var Queryable $dropdownReport */
-        $dropdownReport = $this->placeholder->getDropdownReport()->one(); //Get the report used as dropdown placeholder
+        /** @var QueryInterface $dropdownQuery */
+        $dropdownQuery = $this->placeholder->getDropdownQuery()->one(); //Get the report used as dropdown placeholder
         $html = '';
 
-        if (!$dropdownReport) {
+        if (!$dropdownQuery) {
             return $html;
         }
 
-        //Get the placeholders of the dropdown report
-        $placeholders = $dropdownReport->getPlaceholders();
+        //Get the placeholders of the dropdown query
+        $placeholders = $dropdownQuery->getPlaceholders();
 
         if ($placeholders instanceof ActiveQuery) {
             $placeholders = $placeholders->asArray()->all();
@@ -122,7 +122,7 @@ class SQLReportFilterFactory
         }
 
         //Build the query from the report to get data
-        $queryBuilder = new SQLReportQueryBuilder($dropdownReport, $placeholderValues);
+        $queryBuilder = new SQLReportQueryBuilder($dropdownQuery, $placeholderValues);
         $generator = new SQLReportGenerator($queryBuilder->buildQuery(), $this->database);
         $data = $generator->generateReport();
 
@@ -132,13 +132,13 @@ class SQLReportFilterFactory
 
         //Generate the dropdown from the values
         $html .= Html::beginTag('div', ['class' => 'form-group col-sm-6']) .
-            Html::label($dropdownReport->name, $this->placeholder->getName(), ['class' => 'control-label']) .
+            Html::label($dropdownQuery->name, $this->placeholder->getName(), ['class' => 'control-label']) .
             Select2::widget([
                 'name' => $this->placeholder->getName(),
                 'value' => $value,
                 'data' => $data,
                 'options' => [
-                    'multiple' => true, 'placeholder' => 'Select ' . $dropdownReport->name, 'required' => true,
+                    'multiple' => true, 'placeholder' => 'Select ' . $dropdownQuery->name, 'required' => true,
                     'data-error' => 'Choose an operation'
                 ]
             ]) .
