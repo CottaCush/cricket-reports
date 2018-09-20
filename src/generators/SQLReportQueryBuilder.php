@@ -2,7 +2,7 @@
 
 namespace CottaCush\Cricket\Report\Generators;
 
-use CottaCush\Cricket\Report\Interfaces\Queryable;
+use CottaCush\Cricket\Report\Interfaces\QueryInterface;
 
 /**
  * Class SQLReportQueryBuilder
@@ -12,19 +12,19 @@ use CottaCush\Cricket\Report\Interfaces\Queryable;
  */
 class SQLReportQueryBuilder
 {
-    public $report;
+    public $query;
     public $data;
 
-    public function __construct(Queryable $report, array $data)
+    public function __construct(QueryInterface $query, array $data)
     {
-        $this->report = $report;
+        $this->query = $query;
         $this->data = $data;
     }
 
     public function buildQuery()
     {
         //TODO: Validate the query using the placeholders with the data sent
-        $query = $this->report->getQuery();
+        $query = $this->query->getQuery();
 
         foreach ($this->data as $key => $value) {
             if (is_array($value)) {
