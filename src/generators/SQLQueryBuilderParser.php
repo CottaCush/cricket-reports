@@ -21,10 +21,16 @@ class SQLQueryBuilderParser
      * @param array $data
      * @param array $placeholderValues
      * @param null $db
+     * @param string $function
      * @throws \CottaCush\Cricket\Report\Exceptions\SQLReportGenerationException
      */
-    public function parse(CricketQueryableInterface $report, &$data = [], $placeholderValues = [], $db = null)
-    {
+    public function parse(
+        CricketQueryableInterface $report,
+        &$data = [],
+        $placeholderValues = [],
+        $db = null,
+        $function = SQLReportGenerator::QUERY_ALL
+    ) {
         $queryObj = $report->getQuery();
         $shouldReplacePlaceholders = !empty($placeholderValues); //Should the placeholders be replaced in the query
         $this->hasInputPlaceholders = $queryObj->hasInputPlaceholders();
@@ -46,13 +52,13 @@ class SQLQueryBuilderParser
             $this->query = $queryBuilder->buildQuery();
 
             $generator = new SQLReportGenerator($this->query, $db);
-            $data = $generator->generateReport();
+            $data = $generator->generateReport($function);
 
             $this->hasPlaceholdersReplaced = true;
         } else {
             if (!$this->hasInputPlaceholders) { //No session placeholders and no submission
                 $generator = new SQLReportGenerator($this->query, $db);
-                $data = $generator->generateReport();
+                $data = $generator->generateReport($function);
             }
         }
     }

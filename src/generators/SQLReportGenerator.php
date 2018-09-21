@@ -21,6 +21,10 @@ class SQLReportGenerator implements ReportGeneratorInterface
 
     private $isFreshConnection = false;
 
+    const QUERY_ALL = 'queryAll';
+    const QUERY_ONE = 'queryOne';
+    const QUERY_COLUMN = 'queryColumn';
+
     public function __construct($query, Connection $db = null)
     {
         $this->query = $query;
@@ -33,14 +37,15 @@ class SQLReportGenerator implements ReportGeneratorInterface
 
     /**
      * @author Taiwo Ladipo <taiwo.ladipo@cottacush.com>
+     * @param string $function
      * @return array
      * @throws SQLReportGenerationException
      */
-    public function generateReport()
+    public function generateReport($function = self::QUERY_ALL)
     {
         try {
             $this->openConnection();
-            $result = $this->db->createCommand($this->query)->queryAll();
+            $result = $this->db->createCommand($this->query)->{$function}();
             $this->closeConnection();
         } catch (Exception $e) {
             throw new SQLReportGenerationException($e->getMessage());
