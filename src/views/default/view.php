@@ -23,7 +23,7 @@ $title = $this->title . ' ' .
         ]
     );
 
-echo Html::beginTag('div', ['class' => 'reports-wrapper']);
+echo Html::beginTag('div', ['class' => 'cricket-wrapper']);
 if ($hasPlaceholders && !$hasPlaceholdersReplaced) {
     echo SQLReportFilterWidget::widget([
         'report' => $report,'excludeBootstrapAssets' => $excludeBootstrapAssets

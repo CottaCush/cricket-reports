@@ -10,7 +10,7 @@ $this->params['breadcrumbs'] = [
     'Error'
 ];
 
-echo Html::beginTag('div', ['class' => 'reports-wrapper']);
+echo Html::beginTag('div', ['class' => 'cricket-wrapper']);
 echo ReportErrorWidget::widget([
     'report' => $report,
     'details' => $details,
