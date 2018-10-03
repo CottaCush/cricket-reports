@@ -3,13 +3,17 @@
 namespace CottaCush\Cricket\Report\Assets;
 
 /**
- * Class SQLReportErrorAsset
+ * Class ReportsAsset
  * @author Taiwo Ladipo <taiwo.ladipo@cottacush.com>
  * @package CottaCush\Cricket\Report\Assets
  */
-class SQLReportErrorAsset extends BaseReportsAsset
+class ReportsAsset extends BaseReportsAsset
 {
+    public $css = [
+        'css/styles.css'
+    ];
+
     public $depends = [
-        'CottaCush\Cricket\Report\Assets\ReportsAsset'
+        'CottaCush\Cricket\Assets\CricketAsset'
     ];
 }

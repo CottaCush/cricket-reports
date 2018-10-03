@@ -59,7 +59,11 @@ class SQLReportFilterFactory
             case PlaceholderType::TYPE_DATE:
                 return Html::beginTag('div', ['class' => 'form-group col-sm-6']) .
                     Html::label($description, $name, ['class' => 'control-label']) .
-                    Html::textInput($name, $value, ['class' => 'form-control date-picker', 'required' => true]) .
+                    Html::textInput(
+                        $name,
+                        $value,
+                        ['class' => 'form-control date-picker', 'required' => true, 'autocomplete' => "off"]
+                    ) .
                     Html::endTag('div');
                 break;
 
@@ -77,7 +81,11 @@ class SQLReportFilterFactory
             default:
                 return Html::beginTag('div', ['class' => 'form-group col-sm-6']) .
                     Html::label($description, $name, ['class' => 'control-label']) .
-                    Html::textInput($name, $value, ['class' => 'form-control', 'required' => true]) .
+                    Html::textInput(
+                        $name,
+                        $value,
+                        ['class' => 'form-control', 'required' => true, 'autocomplete' => "off"]
+                    ) .
                     Html::endTag('div');
                 break;
         }
