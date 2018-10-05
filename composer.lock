@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9ba1c86d8735ed32962cdfa1db0a5ab8",
+    "content-hash": "8b652108b9c5efedbc15114710fc37f5",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -370,21 +370,22 @@
         },
         {
             "name": "cottacush/cricket-base",
-            "version": "v0.4",
+            "version": "v0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CottaCush/cricket-base.git",
-                "reference": "cf65ef6f1cc089c1a926fe2abbe5ebd52018bdbf"
+                "reference": "6cbda9600efbd4e8cdfaa9b38102d8015c76290c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CottaCush/cricket-base/zipball/cf65ef6f1cc089c1a926fe2abbe5ebd52018bdbf",
-                "reference": "cf65ef6f1cc089c1a926fe2abbe5ebd52018bdbf",
+                "url": "https://api.github.com/repos/CottaCush/cricket-base/zipball/6cbda9600efbd4e8cdfaa9b38102d8015c76290c",
+                "reference": "6cbda9600efbd4e8cdfaa9b38102d8015c76290c",
                 "shasum": ""
             },
             "require": {
                 "cottacush/yii2-widgets": "^1.0",
-                "hashids/hashids": "^1.0"
+                "hashids/hashids": "^1.0",
+                "kartik-v/yii2-widget-select2": "v2.1.1"
             },
             "require-dev": {
                 "phpunit/phpunit": "~4.0||~5.0",
@@ -437,7 +438,7 @@
                 "report template",
                 "yii2"
             ],
-            "time": "2018-09-27T13:04:33+00:00"
+            "time": "2018-10-05T14:40:51+00:00"
         },
         {
             "name": "cottacush/yii2-widgets",
