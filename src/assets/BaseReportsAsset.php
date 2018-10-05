@@ -19,11 +19,11 @@ class BaseReportsAsset extends AssetBundle
     /**
      * The public js asset directory
      */
-    const ASSETS_JS_PATH = self::ASSETS_PATH . '/js';
+    const ASSETS_JS_PATH = 'js';
     /**
      * The public css asset directory
      */
-    const ASSETS_CSS_PATH = self::ASSETS_PATH . '/css';
+    const ASSETS_CSS_PATH = 'css';
 
     /**
      * Set the sourcePath as self::ASSETS_PATH by default.
