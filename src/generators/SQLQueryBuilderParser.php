@@ -2,7 +2,7 @@
 
 namespace CottaCush\Cricket\Report\Generators;
 
-use CottaCush\Cricket\Report\Interfaces\CricketQueryableInterface;
+use CottaCush\Cricket\Interfaces\CricketQueryableInterface;
 use CottaCush\Cricket\Report\Traits\ValueGetter;
 
 class SQLQueryBuilderParser
