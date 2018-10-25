@@ -2,7 +2,7 @@
 
 namespace CottaCush\Cricket\Report\Generators;
 
-use CottaCush\Cricket\Report\Interfaces\QueryInterface;
+use CottaCush\Cricket\Interfaces\QueryInterface;
 
 /**
  * Class SQLReportQueryBuilder
