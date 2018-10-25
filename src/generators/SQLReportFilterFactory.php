@@ -3,8 +3,8 @@
 namespace CottaCush\Cricket\Report\Generators;
 
 use CottaCush\Cricket\Report\Exceptions\SQLReportGenerationException;
-use CottaCush\Cricket\Report\Interfaces\QueryInterface;
-use CottaCush\Cricket\Report\Interfaces\PlaceholderInterface;
+use CottaCush\Cricket\Interfaces\QueryInterface;
+use CottaCush\Cricket\Interfaces\PlaceholderInterface;
 use CottaCush\Cricket\Report\Models\PlaceholderType;
 use CottaCush\Cricket\Report\Traits\ValueGetter;
 use kartik\select2\Select2;
