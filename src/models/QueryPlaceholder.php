@@ -2,7 +2,7 @@
 
 namespace CottaCush\Cricket\Report\Models;
 
-use CottaCush\Cricket\Report\Interfaces\PlaceholderInterface;
+use CottaCush\Cricket\Interfaces\PlaceholderInterface;
 
 /**
  * This is the model class for table "query_placeholders".

@@ -2,7 +2,7 @@
 
 namespace CottaCush\Cricket\Report\Models;
 
-use CottaCush\Cricket\Report\Interfaces\QueryInterface;
+use CottaCush\Cricket\Interfaces\QueryInterface;
 
 /**
  * This is the model class for table "queries".

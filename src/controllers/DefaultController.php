@@ -2,10 +2,10 @@
 
 namespace CottaCush\Cricket\Report\Controllers;
 
+use CottaCush\Cricket\Generators\SQL\SQLQueryBuilderParser;
 use CottaCush\Cricket\Report\Constants\ErrorCodes;
 use CottaCush\Cricket\Report\Constants\Messages;
 use CottaCush\Cricket\Report\Exceptions\SQLReportGenerationException;
-use CottaCush\Cricket\Report\Generators\SQLQueryBuilderParser;
 use CottaCush\Cricket\Report\Libs\Utils;
 use CottaCush\Cricket\Report\Models\Report;
 use Exception;
@@ -89,7 +89,7 @@ class DefaultController extends BaseReportsController
 
         try {
             $parser = new SQLQueryBuilderParser();
-            $parser->parse($report, $data, $placeholderValues);
+            $data = $parser->parse($report, $placeholderValues);
         } catch (SQLReportGenerationException $ex) {
             return $this->render('error', ['report' => $report, 'details' => $ex->getMessage()]);
         }
