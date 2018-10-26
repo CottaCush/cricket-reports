@@ -2,7 +2,7 @@
 
 namespace CottaCush\Cricket\Report\Models;
 
-use CottaCush\Cricket\Report\Interfaces\CricketQueryableInterface;
+use CottaCush\Cricket\Interfaces\CricketQueryableInterface;
 use CottaCush\Cricket\Report\Libs\Utils;
 
 /**

@@ -2,7 +2,7 @@
 
 namespace CottaCush\Cricket\Report\Widgets;
 
-use CottaCush\Cricket\Report\Interfaces\QueryInterface;
+use CottaCush\Cricket\Interfaces\QueryInterface;
 use CottaCush\Yii2\Widgets\BaseModalWidget;
 
 /**

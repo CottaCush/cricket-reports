@@ -2,7 +2,7 @@
 
 namespace CottaCush\Cricket\Report\Widgets;
 
-use CottaCush\Cricket\Report\Interfaces\CricketQueryableInterface;
+use CottaCush\Cricket\Interfaces\CricketQueryableInterface;
 use CottaCush\Cricket\Report\Libs\Utils;
 use CottaCush\Yii2\Helpers\Html;
 use CottaCush\Yii2\Widgets\EmptyStateWidget;
