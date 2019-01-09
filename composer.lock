@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5f33473345cda8670746f8e40a0b0773",
+    "content-hash": "f23559947e39cb5f973a2a88526a9e7c",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -58,16 +58,16 @@
         },
         {
             "name": "bower-asset/dropzone",
-            "version": "v5.1.1",
+            "version": "v5.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/enyo/dropzone.git",
-                "reference": "7d0792d1346d83a8b0c0d2919121bdd2b8e7fee4"
+                "reference": "08b9e0a763b54a685404dea523a9c54242fbe1b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/enyo/dropzone/zipball/7d0792d1346d83a8b0c0d2919121bdd2b8e7fee4",
-                "reference": "7d0792d1346d83a8b0c0d2919121bdd2b8e7fee4",
+                "url": "https://api.github.com/repos/enyo/dropzone/zipball/08b9e0a763b54a685404dea523a9c54242fbe1b9",
+                "reference": "08b9e0a763b54a685404dea523a9c54242fbe1b9",
                 "shasum": ""
             },
             "type": "bower-asset-library",
@@ -83,7 +83,7 @@
                 ]
             },
             "description": "Dropzone is an easy to use drag'n'drop library. It supports image previews and shows nice progress bars.",
-            "time": "2017-06-20T13:39:37+00:00"
+            "time": "2018-07-06T14:20:31+00:00"
         },
         {
             "name": "bower-asset/font-awesome",
@@ -370,16 +370,16 @@
         },
         {
             "name": "cottacush/cricket-base",
-            "version": "v0.9",
+            "version": "v0.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CottaCush/cricket-base.git",
-                "reference": "2d6f668f3672ccedc1eb363a25862f8e9fe76843"
+                "reference": "4a247c6fb29274f3291280a4001f06b317552b57"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CottaCush/cricket-base/zipball/2d6f668f3672ccedc1eb363a25862f8e9fe76843",
-                "reference": "2d6f668f3672ccedc1eb363a25862f8e9fe76843",
+                "url": "https://api.github.com/repos/CottaCush/cricket-base/zipball/4a247c6fb29274f3291280a4001f06b317552b57",
+                "reference": "4a247c6fb29274f3291280a4001f06b317552b57",
                 "shasum": ""
             },
             "require": {
@@ -500,7 +500,7 @@
                 "cottacush",
                 "yii2-widgets"
             ],
-            "time": "2018-07-27T12:56:36+00:00"
+            "time": "2018-07-27T14:07:17+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
