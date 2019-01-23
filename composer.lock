@@ -370,16 +370,16 @@
         },
         {
             "name": "cottacush/cricket-base",
-            "version": "v0.9.1",
+            "version": "v0.9.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CottaCush/cricket-base.git",
-                "reference": "4a247c6fb29274f3291280a4001f06b317552b57"
+                "reference": "cdb3488d357b494a48a06c0b8912415679b782eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CottaCush/cricket-base/zipball/4a247c6fb29274f3291280a4001f06b317552b57",
-                "reference": "4a247c6fb29274f3291280a4001f06b317552b57",
+                "url": "https://api.github.com/repos/CottaCush/cricket-base/zipball/cdb3488d357b494a48a06c0b8912415679b782eb",
+                "reference": "cdb3488d357b494a48a06c0b8912415679b782eb",
                 "shasum": ""
             },
             "require": {
