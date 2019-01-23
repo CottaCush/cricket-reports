@@ -97,8 +97,12 @@ class DefaultController extends BaseReportsController
         $this->getSession()->set(self::SQL_QUERY_KEY . $id, $parser->query);
 
         return $this->render('view', [
-            'report' => $report, 'data' => $data, 'hasPlaceholders' => $parser->hasInputPlaceholders(), 'encodedId' => $id,
-            'hasPlaceholdersReplaced' => $parser->arePlaceholdersReplaced(), 'values' => $placeholderValues,
+            'report' => $report,
+            'data' => $data,
+            'hasPlaceholders' => $parser->hasInputPlaceholders(),
+            'encodedId' => $id,
+            'hasPlaceholdersReplaced' => $parser->arePlaceholdersReplaced(),
+            'values' => $placeholderValues,
         ]);
     }
 
