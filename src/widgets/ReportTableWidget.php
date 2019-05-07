@@ -125,24 +125,22 @@ class ReportTableWidget extends BaseReportsWidget
 
         echo Html::tag(
             'b',
-            $this->getDataCountInfo()
+            $this->getDataSummary()
         );
 
         echo $this->endDiv();
     }
 
-    private function getDataCountInfo()
+    private function getDataSummary()
     {
         $limit = Report::PAGE_LIMIT;
         $msgTemplate = 'Showing %s &ndash; %s of %s items';
         $msg = sprintf($msgTemplate, 1, $this->count, $this->count);
-        if ($this->count > $limit) {
-            if ($this->page) {
-                $start = ($this->page - 1) * $limit + 1;
-                $end = ($this->page * $limit);
-                $pageTotal = ($end <= $this->count) ? $end : $this->count;
-                $msg = sprintf($msgTemplate, $start, $pageTotal, $this->count);
-            }
+        if ($this->count > $limit && $this->page) {
+            $start = ($this->page - 1) * $limit + 1;
+            $end = ($this->page * $limit);
+            $pageTotal = ($end <= $this->count) ? $end : $this->count;
+            $msg = sprintf($msgTemplate, $start, $pageTotal, $this->count);
         }
         return $msg;
     }
