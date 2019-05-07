@@ -2,7 +2,9 @@
 
 namespace CottaCush\Cricket\Report\Models;
 
+use CottaCush\Cricket\Generators\SQL\SQLGenerator;
 use CottaCush\Cricket\Interfaces\CricketQueryableInterface;
+use CottaCush\Cricket\Models\Query;
 use CottaCush\Cricket\Report\Libs\Utils;
 
 /**
@@ -19,6 +21,7 @@ use CottaCush\Cricket\Report\Libs\Utils;
 class Report extends BaseReportsModel implements CricketQueryableInterface
 {
 
+    const PAGE_LIMIT = SQLGenerator::QUERY_LIMIT;
     /**
      * {@inheritdoc}
      */

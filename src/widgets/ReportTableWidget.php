@@ -4,10 +4,13 @@ namespace CottaCush\Cricket\Report\Widgets;
 
 use CottaCush\Cricket\Interfaces\CricketQueryableInterface;
 use CottaCush\Cricket\Report\Libs\Utils;
+use CottaCush\Cricket\Report\Models\Report;
 use CottaCush\Yii2\Helpers\Html;
 use CottaCush\Yii2\Widgets\EmptyStateWidget;
+use yii\data\Pagination;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
+use yii\widgets\LinkPager;
 
 /**
  * Class ReportTableWidget
@@ -24,7 +27,8 @@ class ReportTableWidget extends BaseReportsWidget
     public $tableClasses = 'table table-striped table-bordered';
 
     public $emptyResultMsg = 'The query returned an empty data set';
-    private $noOfRecords;
+    public $count;
+    public $page = null;
 
     public $hasPlaceholders = false;
     private $hasResults;
@@ -37,8 +41,7 @@ class ReportTableWidget extends BaseReportsWidget
 
     public function init()
     {
-        $this->noOfRecords = count($this->data);
-        $this->hasResults = (bool)$this->noOfRecords;
+        $this->hasResults = (bool)$this->count;
 
         parent::init();
     }
@@ -61,6 +64,7 @@ class ReportTableWidget extends BaseReportsWidget
         }
 
         $this->renderTable();
+        $this->renderPagination();
     }
 
     private function renderTable()
@@ -121,10 +125,36 @@ class ReportTableWidget extends BaseReportsWidget
 
         echo Html::tag(
             'b',
-            $this->noOfRecords . ' record' . ($this->noOfRecords == 1 ? '' : 's') . ' returned'
+            $this->getDataCountInfo()
         );
 
         echo $this->endDiv();
+    }
+
+    private function getDataCountInfo()
+    {
+        $limit = Report::PAGE_LIMIT;
+        $msgTemplate = 'Showing %s &ndash; %s of %s items';
+        $msg = sprintf($msgTemplate, 1, $this->count, $this->count);
+        if ($this->count > $limit) {
+            if ($this->page) {
+                $start = ($this->page - 1) * $limit + 1;
+                $end = ($this->page * $limit);
+                $pageTotal = ($end <= $this->count) ? $end : $this->count;
+                $msg = sprintf($msgTemplate, $start, $pageTotal, $this->count);
+            }
+        }
+        return $msg;
+    }
+
+    private function renderPagination()
+    {
+        echo LinkPager::widget([
+            'pagination' => new Pagination([
+                'totalCount' => $this->count,
+                'pageSize' => Report::PAGE_LIMIT
+            ])
+        ]);
     }
 
     /**
@@ -167,7 +197,7 @@ class ReportTableWidget extends BaseReportsWidget
         if ($this->hasPlaceholders) {
             echo SQLReportFilterModalWidget::widget([
                 'id' => $this->editFilterModalId, 'model' => $this->report, 'data' => $this->placeholderValues,
-                'route' => Url::current(), 'database' => $this->database,
+                'route' => Url::current(['page' => null]), 'database' => $this->database,
                 'excludeBootstrapAssets' => $this->excludeBootstrapAssets
             ]);
         }

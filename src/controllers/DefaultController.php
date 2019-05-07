@@ -19,6 +19,7 @@ use yii2tech\csvgrid\CsvGrid;
 class DefaultController extends BaseReportsController
 {
     const SQL_QUERY_KEY = '_sql_query_';
+    const SQL_RESULT_COUNT_KEY = '_sql_result_count_';
 
     /**
      * @author Taiwo Ladipo <taiwo.ladipo@cottacush.com>
@@ -67,10 +68,13 @@ class DefaultController extends BaseReportsController
 
     /**
      * @author Olawale Lawal <wale@cottacush.com>
+     * @author Taiwo Ladipo <taiwo.ladipo@cottacush.com>
      * @param null $id
+     * @param null $page
      * @return string|\yii\web\Response
+     * @throws \CottaCush\Cricket\Exceptions\SQLQueryGenerationException
      */
-    public function actionView($id = null)
+    public function actionView($id = null, $page = null)
     {
         $reportId = Utils::decodeId($id);
 
@@ -85,10 +89,21 @@ class DefaultController extends BaseReportsController
         }
 
         $data = [];
+        $paginationExtras = ['paginate' => true];
         $placeholderValues = $this->getRequest()->post();
 
         try {
             $parser = new SQLQueryBuilderParser();
+            if ($page) {
+                $paginationExtras['page'] = $page;
+                $paginationExtras['query_string'] = $this->getSession()->get(self::SQL_QUERY_KEY . $id);
+                $count = $this->getSession()->get(self::SQL_RESULT_COUNT_KEY . $id);
+            }
+            $data = $parser->parse($report, $placeholderValues, null, null, $paginationExtras);
+            if (!$page) {
+                $count = ArrayHelper::getValue($data, 'count');
+                $this->getSession()->set(self::SQL_RESULT_COUNT_KEY . $id, $count);
+            }
             $data = $parser->parse($report, $placeholderValues);
         } catch (SQLReportGenerationException $ex) {
             return $this->render('error', ['report' => $report, 'details' => $ex->getMessage()]);
@@ -98,11 +113,13 @@ class DefaultController extends BaseReportsController
 
         return $this->render('view', [
             'report' => $report,
-            'data' => $data,
+            'data' => ArrayHelper::getValue($data, 'data'),
             'hasPlaceholders' => $parser->hasInputPlaceholders(),
             'encodedId' => $id,
             'hasPlaceholdersReplaced' => $parser->arePlaceholdersReplaced(),
             'values' => $placeholderValues,
+            'count' => $count,
+            'page' => $page
         ]);
     }
 

@@ -31,7 +31,7 @@ if ($hasPlaceholders && !$hasPlaceholdersReplaced) {
 } else {
     echo ReportTableWidget::widget([
         'data' => $data, 'report' => $report, 'hasPlaceholders' => $hasPlaceholders, 'placeholderValues' => $values,
-        'excludeBootstrapAssets' => $excludeBootstrapAssets
+        'excludeBootstrapAssets' => $excludeBootstrapAssets, 'count' => $count, 'page' => $page
     ]);
 }
 echo Html::endTag('div');
